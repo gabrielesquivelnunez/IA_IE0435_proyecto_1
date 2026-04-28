@@ -12,7 +12,7 @@ UMBRAL             = 200  # pixel >= umbral → 1 (blanco), < umbral → 0 (obje
 def imagen_a_vector(ruta, etiqueta):
     img = cv2.imread(ruta, cv2.IMREAD_GRAYSCALE)
     if img is None:
-        print(f"  ❌ No se pudo leer: {ruta}")
+        print(f"  No se pudo leer: {ruta}")
         return None
     
     # Convertir a matriz de 1s y 0s según el umbral
@@ -28,7 +28,7 @@ def procesar_carpeta(carpeta, etiqueta):
     extensiones = ('.jpg', '.jpeg', '.png', '.webp')
     archivos = [f for f in os.listdir(carpeta) if f.lower().endswith(extensiones)]
     
-    print(f"\n📂 Procesando '{carpeta}' ({len(archivos)} imágenes, etiqueta={etiqueta})")
+    print(f"\nProcesando '{carpeta}' ({len(archivos)} imágenes, etiqueta={etiqueta})")
     
     for i, nombre in enumerate(archivos, 1):
         ruta = os.path.join(carpeta, nombre)
@@ -50,7 +50,7 @@ with open(ARCHIVO_SALIDA, 'w') as f:
         linea = ",".join(map(str, vector))
         f.write(linea + "\n")
 
-print(f"\n🎉 Listo! {len(todos)} imágenes procesadas.")
+print(f"\n Listo! {len(todos)} imágenes procesadas.")
 print(f"📄 Archivo guardado: {ARCHIVO_SALIDA}")
 print(f"📐 Dimensiones: {len(todos)} filas × {len(todos[0])} columnas")
 print(f"   (128×128 píxeles = 16384 columnas + 1 etiqueta = 16385 columnas)")
