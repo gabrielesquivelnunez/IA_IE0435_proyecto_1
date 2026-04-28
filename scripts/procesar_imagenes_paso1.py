@@ -23,7 +23,7 @@ def recortar_hoja(img):
     contornos, _ = cv2.findContours(umbral, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     
     if not contornos:
-        print("  ⚠️  No se encontró contorno, se usa la imagen completa")
+        print("   No se encontró contorno, se usa la imagen completa")
         return img
     
     # Tomar el contorno más grande (que debería ser la hoja)
@@ -32,7 +32,7 @@ def recortar_hoja(img):
     # Verificar que el contorno sea suficientemente grande
     area = cv2.contourArea(contorno_hoja)
     if area < img.shape[0] * img.shape[1] * 0.1:
-        print("  ⚠️  Contorno muy pequeño, se usa la imagen completa")
+        print("   Contorno muy pequeño, se usa la imagen completa")
         return img
     
     # Obtener el rectángulo del contorno
@@ -52,9 +52,9 @@ extensiones = ('.jpg', '.jpeg', '.png', '.webp')
 fotos = [f for f in os.listdir(CARPETA_ENTRADA) if f.lower().endswith(extensiones)]
 
 if not fotos:
-    print("❌ No se encontraron fotos en la carpeta 'fotos'")
+    print("No se encontraron fotos en la carpeta 'fotos'")
 else:
-    print(f"📂 Se encontraron {len(fotos)} fotos\n")
+    print(f"Se encontraron {len(fotos)} fotos\n")
     
     for i, nombre in enumerate(fotos, 1):
         ruta = os.path.join(CARPETA_ENTRADA, nombre)
@@ -62,7 +62,7 @@ else:
         
         img = cv2.imread(ruta)
         if img is None:
-            print("  ❌ No se pudo leer la imagen, saltando...")
+            print(" No se pudo leer la imagen, saltando...")
             continue
         
         # 1. Recortar la hoja
@@ -77,6 +77,6 @@ else:
         # Guardar con el mismo nombre
         nombre_salida = os.path.splitext(nombre)[0] + ".png"
         cv2.imwrite(os.path.join(CARPETA_SALIDA, nombre_salida), final)
-        print(f"  ✅ Guardada como {nombre_salida}")
+        print(f"Guardada como {nombre_salida}")
     
-    print(f"\n🎉 Listo! {len(fotos)} fotos procesadas en la carpeta '{CARPETA_SALIDA}'")
+    print(f"\n Listo! {len(fotos)} fotos procesadas en la carpeta '{CARPETA_SALIDA}'")
